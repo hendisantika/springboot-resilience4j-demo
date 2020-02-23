@@ -1,9 +1,12 @@
 package com.hendisantika.springbootresilience4jdemo;
 
+import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerOpenException;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
@@ -28,6 +31,12 @@ public class SpringbootResilience4jDemoApplication {
             log.warn("Exception in method");
         }
     });
+
+    @Bean
+    CircuitBreaker defaultCircuitBreaker(CircuitBreakerRegistry circuitBreakerRegistry) {
+        return circuitBreakerRegistry.circuitBreaker("default");
+    }
+
 
     @Service
     class CircuitBreakerTestService {
