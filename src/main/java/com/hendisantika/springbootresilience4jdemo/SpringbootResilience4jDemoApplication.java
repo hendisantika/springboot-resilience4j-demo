@@ -1,6 +1,7 @@
 package com.hendisantika.springbootresilience4jdemo;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerOpenException;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.ApplicationRunner;
