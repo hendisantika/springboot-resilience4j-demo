@@ -1,7 +1,7 @@
 package com.hendisantika.springbootresilience4jdemo;
 
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
-import io.github.resilience4j.circuitbreaker.CircuitBreakerOpenException;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.ApplicationRunner;
@@ -26,7 +26,8 @@ public class SpringbootResilience4jDemoApplication {
     private static final Consumer<Runnable> consumer = runnable -> IntStream.range(0, 5).forEach(value -> {
         try {
             runnable.run();
-        } catch (CircuitBreakerOpenException e) {
+//        } catch (CircuitBreakerOpenException e) {
+        } catch (CallNotPermittedException e) {
             log.warn("Circuit breaker applied");
         } catch (Exception e) {
             log.warn("Exception in method");
